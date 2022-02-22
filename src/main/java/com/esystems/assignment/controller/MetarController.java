@@ -1,5 +1,7 @@
 package com.esystems.assignment.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.esystems.assignment.entity.Metar;
+import com.esystems.assignment.repository.temperatureAndWindStrength;
 import com.esystems.assignment.service.MetarService;
 
 @RestController
@@ -28,5 +31,10 @@ public class MetarController {
 	@GetMapping("/get/airport/{icaoCode}/METAR")
 	public ResponseEntity<Metar> getMetarDataByIcaoCode(@PathVariable String icaoCode){
 		return new ResponseEntity<Metar>(metarService.retrieveMetarData(icaoCode), HttpStatus.FOUND);
+	}
+	
+	@GetMapping("/get/windStrength/temperature")
+	public ResponseEntity<List<temperatureAndWindStrength>> getWindStrengthAndTemperature() {
+		return new ResponseEntity<List<temperatureAndWindStrength>>(metarService.retrieveWindStrengthAndTemperature(), HttpStatus.FOUND);
 	}
 }

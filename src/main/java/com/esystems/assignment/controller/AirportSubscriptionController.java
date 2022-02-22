@@ -62,7 +62,7 @@ public class AirportSubscriptionController {
 
 	@GetMapping("/get/subscriptions/list")
 	public ResponseEntity<List<Subscription>> getSubscriptionsList() {
-		return new ResponseEntity<List<Subscription>>(airportSubscriptionService.retrieveSubscribtionsList(),
+		return new ResponseEntity<List<Subscription>>(airportSubscriptionService.retrieveActiveSubscribtion(),
 				HttpStatus.FOUND);
 	}
 
@@ -71,5 +71,12 @@ public class AirportSubscriptionController {
 		String message = airportSubscriptionService.deleteSubscription(icaoCode);
 
 		return new ResponseEntity<String>(message, HttpStatus.OK);
+	}
+	
+	@PatchMapping("/put/subscription/{icaoCode}")
+	public ResponseEntity<Subscription> updateSubscription(@PathVariable String icaoCode,
+			@RequestBody Map<Object, Object> fields) {
+		return new ResponseEntity<Subscription>(
+				airportSubscriptionService.activateDeactivateSubscribe(icaoCode, fields), HttpStatus.OK);
 	}
 }
