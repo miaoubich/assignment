@@ -1,0 +1,284 @@
+{
+	"info": {
+		"_postman_id": "6773db91-38b0-4655-b236-c6921ca384d4",
+		"name": "METAR-Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Subscription",
+			"item": [
+				{
+					"name": "Create subscription",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"icaoCode\":\"LDZA\",\r\n    \"name\":\"Pleso Airport\",\r\n    \"active\":\"0\",\r\n    \"location\":{\r\n        \"city\":\"Zagreb\",\r\n        \"country\":\"Croatia\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9091/api/post/subscription",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9091",
+							"path": [
+								"api",
+								"post",
+								"subscription"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get single subscription",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9091/api/get/subscription/LDSP",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9091",
+							"path": [
+								"api",
+								"get",
+								"subscription",
+								"LDSP"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add subscriptions",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"icaoCode\":\"LDZD\",\r\n        \"name\":\"Zadar Airport\",\r\n        \"active\":\"0\",\r\n        \"location\":{\r\n            \"city\":\"Zadar\",\r\n            \"country\":\"Croatia\"\r\n        }\r\n    },\r\n    {\r\n        \"icaoCode\":\"LDSP\",\r\n        \"name\":\"Resnik Airport\",\r\n        \"active\":\"0\",\r\n        \"location\":{\r\n            \"city\":\"Split\",\r\n            \"country\":\"Croatia\"\r\n        }\r\n    },\r\n    {\r\n        \"icaoCode\":\"LDDU\",\r\n        \"name\":\"Cilipi Airport\",\r\n        \"active\":\"1\",\r\n        \"location\":{\r\n            \"city\":\"Dubrovnik\",\r\n            \"country\":\"Croatia\"\r\n        }\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9091/api/post/subscriptions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9091",
+							"path": [
+								"api",
+								"post",
+								"subscriptions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete subscription",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9091/api/delete/subscription/LDSP",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9091",
+							"path": [
+								"api",
+								"delete",
+								"subscription",
+								"LDSP"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activate subscription",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"active\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9091/api/put/subscription/LDZD",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9091",
+							"path": [
+								"api",
+								"put",
+								"subscription",
+								"LDZD"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get subscriptions list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9091/api/get/subscriptions/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9091",
+							"path": [
+								"api",
+								"get",
+								"subscriptions",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Metar",
+			"item": [
+				{
+					"name": "Insert Metar Data multi-fields",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"timeStamp\":\"85\",\r\n    \"temperature\":\"79\",\r\n    \"dewPoint\":\"74\",\r\n    \"windDirection\":\"North\",\r\n    \"windSpeed\":\"62\",\r\n    \"windStrength\":\"85\",\r\n    \"precipitation\":\"200\",\r\n    \"heights\":\"5200\",\r\n    \"visibility\":\"25\",\r\n    \"barometricPressure\":\"25\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9091/api/post/airport/LDSP/METAR",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9091",
+							"path": [
+								"api",
+								"post",
+								"airport",
+								"LDSP",
+								"METAR"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert Metar Data",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mdata\":\"METAR LDZD 864251P 1442MPK 050V240 2040 R05/P1900N R20/P1900N OVC060 0/M04 Q1070=\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9091/api/post/airport/METAR",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9091",
+							"path": [
+								"api",
+								"post",
+								"airport",
+								"METAR"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Metar Data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9091/api/get/airport/LDZA/METAR",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9091",
+							"path": [
+								"api",
+								"get",
+								"airport",
+								"LDZA",
+								"METAR"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Wind Strength & Temperature",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9091/api/get/windStrength/temperature",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9091",
+							"path": [
+								"api",
+								"get",
+								"windStrength",
+								"temperature"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
