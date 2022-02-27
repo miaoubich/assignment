@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import com.esystems.assignment.service.MetarService;
 
 @RestController
 @RequestMapping("/api")
+@EnableTransactionManagement
 public class MetarController {
 
 	@Autowired
@@ -31,6 +33,11 @@ public class MetarController {
 	@GetMapping("/get/airport/{icaoCode}/METAR")
 	public ResponseEntity<Metar> getMetarDataByIcaoCode(@PathVariable String icaoCode){
 		return new ResponseEntity<Metar>(metarService.retrieveMetarData(icaoCode), HttpStatus.FOUND);
+	}
+	
+	@GetMapping("/get/airport/all")
+	public ResponseEntity<List<Metar>> getMetarDataList(){
+		return new ResponseEntity<List<Metar>>(metarService.retrieveMetarDataList(), HttpStatus.FOUND);
 	}
 	
 	@GetMapping("/get/windStrength/temperature")

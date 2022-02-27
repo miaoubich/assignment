@@ -2,6 +2,8 @@ package com.esystems.assignment.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,9 +26,16 @@ public class MetarService {
 
 	private MetarData metarData = new MetarData();
 
+	@Transactional
 	public String insertMetarData(Metar metar) {
 		metarRepository.save(metar);
-		storeMetarDataEachInField(metar);
+		
+		List<Metar> metars = metarRepository.findAll();
+		if (metars.size() != 0) {
+			for(Metar m : metars) {
+				storeMetarDataEachInField(m);
+			}
+		}
 
 		return "Metar Data inserted successful.";
 	}
@@ -39,6 +48,15 @@ public class MetarService {
 				return metar;
 		}
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Metar Not Found, or doesn't exist.");
+	}
+
+	public List<Metar> retrieveMetarDataList() {
+		List<Metar> metars = metarRepository.findAll();
+
+		if (metars.size() != 0)
+			return metars;
+		else 
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No metar data found.");
 	}
 
 	public void storeMetarDataEachInField(Metar metar) {
