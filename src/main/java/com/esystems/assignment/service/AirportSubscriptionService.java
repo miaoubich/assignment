@@ -3,6 +3,7 @@ package com.esystems.assignment.service;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.ReflectionUtils;
@@ -69,8 +70,12 @@ public class AirportSubscriptionService {
 	}
 
 	public List<Subscription> retrieveActiveSubscribtion() {
-		String active = "1";
-		List<Subscription> subscriptions = subscriptionRepository.findByActive(active);
+//		String active = "1";
+		List<Subscription> subscriptions = subscriptionRepository	//.findByActive(active);
+																 .findAll()
+																 .stream()
+																 .filter(s->(Integer.valueOf(s.getActive())==1))
+																 .collect(Collectors.toList());
 		if (subscriptions.size() > 0)
 			return subscriptions;
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No active subscription found.");
